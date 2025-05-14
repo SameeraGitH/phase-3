@@ -10,15 +10,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     try {
-        // 1. Load ONLY from API (single source of truth)
+        // Loading ONLY from API
         const response = await fetch('api.php?action=getActivities&nocache=' + Date.now());
         if (!response.ok) throw new Error('API request failed');
 
-        // 2. Parse and validate the data
+        
         const apiActivities = await response.json();
         if (!Array.isArray(apiActivities)) throw new Error('Invalid data format');
 
-        // 3. Remove duplicates by ID (safety check)
+        
         const uniqueActivities = [];
         const ids = new Set();
 
@@ -31,12 +31,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         allActivities = uniqueActivities;
 
-        // 4. Debug output
+        //  Debugging the output here
         console.log('Unique activities loaded:', allActivities);
         console.log('Duplicate check:', 
             allActivities.length !== ids.size ? 'DUPLICATES FOUND' : 'No duplicates');
 
-        // 5. Initialize UI
+        
         populateClubFilter(allActivities);
         renderActivities();
         setupEventListeners();
@@ -70,7 +70,7 @@ function renderActivities(activitiesToRender = null) {
         displayActivities = filteredActivities;
     }
 
-    // Apply search filter if term exists
+    // Apply search filter if the term exists
     if (currentSearchTerm) {
         displayActivities = displayActivities.filter(activity => 
             (activity.title && activity.title.toLowerCase().includes(currentSearchTerm)) || 
@@ -78,7 +78,7 @@ function renderActivities(activitiesToRender = null) {
         );
     }
 
-    // If specific activities were passed (for search), use those
+    // If specific activities were passed (for search) using themm
     if (activitiesToRender) {
         displayActivities = activitiesToRender;
     }
@@ -141,8 +141,8 @@ function setupEventListeners() {
             ? allActivities.filter(a => a.club === e.target.value)
             : null;
         currentPage = 1;
-        currentSearchTerm = ''; // Reset search when changing clubs
-        document.getElementById('searchInput').value = ''; // Clear search input
+        currentSearchTerm = ''; // Resetss search when changing clubs
+        document.getElementById('searchInput').value = ''; // Clearing search input
         renderActivities();
     });
 }
@@ -172,7 +172,7 @@ window.submitNewActivity = async function(formData) {
         const result = await response.json();
         if (!result.success) throw new Error(result.message || 'Creation failed');
 
-        // 3. FULL PAGE RELOAD to prevent state issues
+        // 3. full page reload t
         window.location.href = 'index.php?success=true';
 
     } catch (error) {
@@ -185,7 +185,7 @@ async function editActivity(id) { //edit activity
     const response = await fetch(`api.php?action=getActivity&id=${id}`);
     const activity = await response.json();
 
-    // Create URLSearchParams to properly encode values
+    
     const params = new URLSearchParams();
     params.append('edit', id);
     params.append('title', activity.title || '');

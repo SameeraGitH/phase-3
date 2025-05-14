@@ -22,7 +22,7 @@ try {
 
 header('Content-Type: application/json');
 
-// Handle different actions
+// Handling different actions
 $action = $_GET['action'] ?? '';
 
 try {
@@ -42,7 +42,7 @@ try {
             $activity = $stmt->fetch();
 
             if ($activity) {
-                // Ensure consistent field names (especially for date_time/dateTime)
+                
                 $activity['dateTime'] = $activity['date_time'] ?? $activity['dateTime'] ?? '';
                 echo json_encode($activity);
             } else {

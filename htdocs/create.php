@@ -1,7 +1,7 @@
 <?php
 require 'db.php';
 
-// Enable error reporting for debugging
+//  debugging
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -10,7 +10,7 @@ header('Content-Type: application/json');
 $input = file_get_contents('php://input');
 $data = json_decode($input, true);
 
-// Debugging: Log raw input
+
 file_put_contents('debug.log', "Input received: " . $input . "\n", FILE_APPEND);
 
 if (!$data) {
@@ -22,7 +22,7 @@ if (!$data) {
     exit;
 }
 
-// Validate required fields
+// Validating required fields
 $required = ['title', 'club', 'dateTime', 'description'];
 $missing = array_diff($required, array_keys($data));
 
@@ -52,7 +52,7 @@ try {
     ]);
 
     if ($success) {
-        // Get the inserted ID for confirmation
+        // Geting  the inserted ID for confirmation
         $insertId = $pdo->lastInsertId();
         file_put_contents('debug.log', "Insert successful. ID: $insertId\n", FILE_APPEND);
 

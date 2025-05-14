@@ -54,9 +54,9 @@
             id="clubFilter" 
             class="w-full px-3 py-1.5 border border-gray-300 rounded-md shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
-            <!-- "All Clubs" is the only hardcoded option -->
+            
             <option value="">All Clubs</option>
-            <!-- Other options will be added dynamically by JavaScript -->
+            
         </select>
         
       </div>
@@ -94,7 +94,7 @@
         const data = await response.json();
 
         const activityList = document.getElementById('activity-list');
-        activityList.innerHTML = ''; // clear the previous ones
+        activityList.innerHTML = ''; // clearing the previous ones
 
         if (data.length === 0) {
           activityList.innerHTML = '<p>No activities found.</p>';
@@ -135,9 +135,9 @@
             </button>
         </form>
 
-        <!-- Comments List -->
+        <!-- Comments List here -->
         <div id="commentsContainer" class="space-y-4">
-            <!-- Comments will be loaded here -->
+            
         </div>
     </div>
 

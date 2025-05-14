@@ -3,7 +3,7 @@ header("Content-Type: application/json");
 require 'db.php';
 
 try {
-    $stmt = $pdo->query("SELECT * FROM activities"); // Replace 'activities' with your actual table name
+    $stmt = $pdo->query("SELECT * FROM activities"); 
     $activities = $stmt->fetchAll();
     echo json_encode($activities);
 } catch (PDOException $e) {
